@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraud Detection Dashboard</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+    <script src="/static/js/main.js" defer></script>
+
+</head>
+<body>
+    <div class="navbar">
+        <h1>Fraud Detection System</h1>
+    </div>
+
+    <div class="content">
+        <h2>Transaction Stream</h2>
+        <div id="transaction-feed">
+            <!-- Real-time transaction feed will populate here -->
+        </div>
+
+        <h2>Controls</h2>
+        <button id="start-consumer">Start Kafka Consumer</button>
+        <button id="stop-consumer">Stop Kafka Consumer</button>
+    </div>
+
+    <footer>
+        <p>Fraud Detection System © 2025</p>
+    </footer>
+</body>
+</html>
