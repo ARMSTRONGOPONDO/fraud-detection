@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraud Detection System</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+    <script src="/static/js/main.js" defer></script>
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .transaction-box {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .side-panel {
+            width: 250px;
+            background-color: #8b5454;
+            border-right: 1px solid #ddd;
+            padding: 20px;
+        }
+        .side-panel button {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .content-area {
+            margin-left: 200px;
+            padding: 20px;
+        }
+
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Collapsible Side Panel -->
+        <div class="side-panel">
+            <button class="btn btn-primary" onclick="showContent('user-location-form')">Register rules</button>
+            <button class="btn btn-primary" onclick="showContent('query')">Trabsactions</button>
+            <button class="btn btn-primary" onclick="showContent('analytics')">Analytics</button>
+        </div>
+
+
+        <!-- Main Content -->
+        <div class="container ">
+                <!-- User Selection -->
+                <div class="transaction-box">
+                <form id="user-location-form" class="content-section">
+                    <h4>Select User, Location, and Time</h4>
+                    <div class="mb-3">
+                        <label for="userId" class="form-label">User ID</label>
+                        <input type="number" class="form-control" id="userId" placeholder="Enter User ID" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="userLocation" class="form-label">User Location</label>
+                        <select class="form-select" id="userLocation" required>
+                            <option value="Nairobi">Nairobi</option>
+                            <option value="Eldoret">Eldoret</option>
+                            <option value="Kisii">Kisii</option>
+                            <option value="Kiambu">Kiambu</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="customTimeStart" class="form-label">Custom Time Start</label>
+                        <input type="time" class="form-control" id="customTimeStart" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="customTimeEnd" class="form-label">Custom Time End</label>
+                        <input type="time" class="form-control" id="customTimeEnd" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="dailyTransactionLimit" class="form-label">Daily Transaction Limit</label>
+                        <input type="number" class="form-control" id="dailyTransactionLimit" placeholder="Enter amount in KSH" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="largeTransactionAmount" class="form-label">Flag Transactions Above</label>
+                        <input type="number" class="form-control" id="largeTransactionAmount" placeholder="Enter number of transactions" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Set User</button>
+                </form>
+            </div>
+
+
+            <!-- Query Content -->
+            <div id="query" class="content-section" style="display: none;">
+                <h4>Transaction Stream</h4>
+                <div class="transaction-box">
+                    <form id="user-query-form" class="mb-3">
+                        <label for="query-user-id">Query by User ID:</label>
+                        <input type="number" id="query-user-id" class="form-control" placeholder="Enter User ID" required>
+                        <button type="submit" class="btn btn-primary mt-2">Filter</button>
+                    </form>
+                    <ul class="list-group" id="transaction-feed">
+                        <!-- Transactions will be dynamically added here -->
+                    </ul>
+                </div>
+            </div>
+
+
+            <!-- Real-Time Visualization -->
+            <div class="col-lg-6">
+            <div  style="width: 700px;">
+                <div id="analytics" class="content-section" style="display: none;" >
+                <h4>Transaction Analysis</h4>
+                <canvas id="fraudChart" class="transaction-box"></canvas>
+                <canvas id="transactionTypeChart" class="transaction-box"></canvas>
+                <canvas id="transactionFrequencyChart" class="transaction-box"></canvas>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="d-flex justify-content-start">
+            <button id="start-consumer" class="btn btn-primary me-2">Start Kafka Consumer</button>
+            <button id="stop-consumer" class="btn btn-danger">Stop Kafka Consumer</button>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Fraud Detection System &copy; 2025</p>
+    </footer>
+
+
+    <script>
+        function showContent(section) {
+            document.querySelectorAll('.content-section').forEach(function(el) {
+                el.style.display = 'none';
+            });
+            document.getElementById(section).style.display = 'block';
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,89 @@
+/* General reset */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Header styling */
+h1 {
+    text-align: center;
+    margin: 20px 0;
+    color: #222;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+}
+
+/* Transaction feed container */
+#transaction-feed {
+    width: 700px;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 20px;
+}
+
+/* Individual transaction entries */
+.transaction-item {
+    padding: 15px;
+    border-bottom: 1px solid #eaeaea;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.transaction-item:last-child {
+    border-bottom: none;
+}
+
+.transaction-item:nth-child(odd) {
+    background-color: #fafafa;
+}
+
+/* Transaction details */
+.transaction-details {
+    flex: 1;
+}
+
+.transaction-details span {
+    display: block;
+    margin: 5px 0;
+}
+
+/* Status indicators */
+.status-alert {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #d9534f; /* Red for flagged transactions */
+}
+
+.status-normal {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #5cb85c; /* Green for normal transactions */
+}
+
+/* Buttons (if needed later) */
+button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.container {
+    margin-left: 200px;
+    padding: 20px;
+}
